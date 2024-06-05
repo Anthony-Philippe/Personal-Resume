@@ -2,3 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "GeistVF";
+  src: url("./assets/fonts/GeistVF.woff2") format("woff2");
+}
+
+:root {
+  font-family: "GeistVF", sans-serif;
+  font-weight: 600;
+}
+
+.custom-span {
+  @apply text-primary-500;
+}
+
+span {
+  font-weight: 800;
+  @apply custom-span;
+}
