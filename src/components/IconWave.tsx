@@ -10,9 +10,9 @@ type IconWaveProps = {
   icons: IconLink[];
 };
 
-export const IconWave: React.FC<IconWaveProps> = ({ icons }) => {
+export const IconWave = ({ icons }: IconWaveProps) => {
   return (
-    <div className="flex space-x-8 absolute top-8 left-4">
+    <div className="flex space-x-8">
       {icons.map((iconLink, index) => (
         <motion.a
           key={index}
