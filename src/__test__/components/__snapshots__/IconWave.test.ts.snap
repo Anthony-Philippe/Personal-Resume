@@ -4,7 +4,7 @@ exports[`IconWave should render with icons 1`] = `
 <div
   className="flex space-x-8"
 >
-  <a
+  <ForwardRef(MotionComponent)
     animate={
       {
         "opacity": 1,
@@ -37,8 +37,8 @@ exports[`IconWave should render with icons 1`] = `
     }
   >
     GitHubIcon
-  </a>
-  <a
+  </ForwardRef(MotionComponent)>
+  <ForwardRef(MotionComponent)
     animate={
       {
         "opacity": 1,
@@ -71,7 +71,7 @@ exports[`IconWave should render with icons 1`] = `
     }
   >
     LinkedInIcon
-  </a>
+  </ForwardRef(MotionComponent)>
 </div>
 `;
 

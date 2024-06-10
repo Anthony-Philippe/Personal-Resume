@@ -1,12 +1,5 @@
 import { IconWave } from "../../components/IconWave";
 
-jest.mock("framer-motion", () => ({
-  ...jest.requireActual("framer-motion"),
-  motion: {
-    a: ({ children }: { children: any }) => children,
-  },
-}));
-
 jest.mock("react", () => ({
   ...jest.requireActual("react"),
   createElement: jest.fn(),
@@ -28,5 +21,14 @@ describe("IconWave", () => {
     ];
     const wrapper = IconWave({ icons } as any);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  test("should render framer motion", () => {
+    jest.mock("framer-motion", () => ({
+      ...jest.requireActual("framer-motion"),
+      motion: {
+        div: ({ children }: { children: any }) => children,
+      },
+    }));
   });
 });
