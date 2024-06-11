@@ -28,7 +28,13 @@ describe("IconWave", () => {
       ...jest.requireActual("framer-motion"),
       motion: {
         div: ({ children }: { children: any }) => children,
+        a: ({ children }: { children: any }) => children,
       },
     }));
+    const wrapper = IconWave({ icons: [] });
+    expect(wrapper).toMatchObject({
+      type: "div",
+      props: { className: "flex space-x-8" },
+    });
   });
 });
