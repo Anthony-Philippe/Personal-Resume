@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reveal should render with children 1`] = `undefined`;
+
+exports[`Reveal should render with children and props 1`] = `undefined`;
+
+exports[`Reveal should render with framer motion 1`] = `undefined`;
+
+exports[`Reveal should render without children 1`] = `undefined`;
