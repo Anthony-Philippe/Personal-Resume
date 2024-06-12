@@ -49,7 +49,7 @@ interface BounceCardProps {
   children: React.ReactNode;
 }
 
-const BounceCard = ({ className, children }: BounceCardProps) => {
+export const BounceCard = ({ className, children }: BounceCardProps) => {
   return (
     <motion.div
       whileHover={{ scale: 0.95, rotate: "-1deg" }}
