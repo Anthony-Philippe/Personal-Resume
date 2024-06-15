@@ -41,7 +41,7 @@ export const Reveal = ({ children, width = "fit-content" }: RevealProps) => {
         initial="hidden"
         animate={slideControls}
         transition={{ duration: 0.8, ease: "easeIn" }}
-        className="inset-0 top-1 absolute bg-primary-500 z-20"
+        className="absolute inset-0 top-1 z-20 bg-primary-500"
       />
     </div>
   );

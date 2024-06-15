@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 
 export const Header = () => {
   return (
-    <div className="relative flex flex-row h-screen items-center justify-evenly mx-36">
+    <div className="relative mx-36 flex h-screen flex-row items-center justify-evenly">
       <Hero />
       <motion.div
         initial={{ y: "-100vh", opacity: 0 }}

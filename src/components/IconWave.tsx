@@ -22,7 +22,7 @@ export const IconWave = ({ icons }: IconWaveProps) => {
           initial={{ y: "-100vh", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.2, delay: index * 0.2 }}
-          className="relative text-3xl text-white cursor-pointer"
+          className="relative cursor-pointer text-3xl text-white"
           whileHover={{ scale: 1.3, transition: { duration: 0.4 } }}
         >
           {iconLink.icon}
