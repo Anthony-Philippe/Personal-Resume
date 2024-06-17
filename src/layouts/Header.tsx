@@ -4,15 +4,17 @@ import { Hero } from "@layouts/Hero";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 
+const animationProps = {
+  initial: { y: "-100vh", opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  transition: { duration: 1.2 },
+};
+
 export const Header = () => {
   return (
     <div className="relative mx-36 flex h-screen flex-row items-center justify-evenly">
       <Hero />
-      <motion.div
-        initial={{ y: "-100vh", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.2 }}
-      >
+      <motion.div {...animationProps}>
         <Lottie animationData={rocket} className="size-96" />
       </motion.div>
       <AuroraHero />

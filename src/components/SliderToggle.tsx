@@ -25,11 +25,14 @@ interface SwitchProps {
 }
 
 const Switch = ({ selected, setSelected }: SwitchProps) => {
+  const isSelectedLight = selected === "light";
+  const isSelectedDark = selected === "dark";
+
   return (
     <div className="relative flex w-fit items-center rounded-full">
       <button
         className={`${TOGGLE_CLASSES} ${
-          selected === "light" ? "text-white" : "text-slate-300"
+          isSelectedLight ? "text-white" : "text-slate-300"
         }`}
         onClick={() => {
           setSelected("light");
@@ -38,7 +41,7 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
         <Brightness2OutlinedIcon className="relative z-10 text-lg md:text-sm" />
         <span
           className={`relative z-10 font-semibold ${
-            selected === "light" ? "text-white" : "text-slate-300"
+            isSelectedLight ? "text-white" : "text-slate-300"
           }`}
         >
           Light
@@ -46,7 +49,7 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
       </button>
       <button
         className={`${TOGGLE_CLASSES} ${
-          selected === "dark" ? "text-white" : "text-slate-300"
+          isSelectedDark ? "text-white" : "text-slate-300"
         }`}
         onClick={() => {
           setSelected("dark");
@@ -55,7 +58,7 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
         <WbSunnyOutlinedIcon className="relative z-10 text-lg md:text-sm" />
         <span
           className={`relative z-10 font-semibold ${
-            selected === "dark" ? "text-white" : "text-slate-300"
+            isSelectedDark ? "text-white" : "text-slate-300"
           }`}
         >
           Dark
@@ -63,7 +66,7 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
       </button>
       <div
         className={`absolute inset-0 z-0 flex ${
-          selected === "dark" ? "justify-end" : "justify-start"
+          isSelectedDark ? "justify-end" : "justify-start"
         }`}
       >
         <motion.span
