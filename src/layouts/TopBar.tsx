@@ -8,11 +8,11 @@ export const TopBar = () => {
   const icons = [
     {
       icon: <GitHubIcon />,
-      link: "https://github.com",
+      link: "https://github.com/Anthony-Philippe",
     },
     {
       icon: <LinkedInIcon />,
-      link: "https://linkedin.com",
+      link: "https://linkedin.com/in/anthony--philippe",
     },
   ];
   return (
