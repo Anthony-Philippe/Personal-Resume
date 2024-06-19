@@ -3,6 +3,7 @@ import { AuroraHero } from "@components/Aurora";
 import { Hero } from "@layouts/Hero";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
+import React, { useMemo } from "react";
 
 const animationProps = {
   initial: { y: "-100vh", opacity: 0 },
@@ -10,14 +11,19 @@ const animationProps = {
   transition: { duration: 1.2 },
 };
 
-export const Header = () => {
+const HeaderComponent  = () => {
+  const memoizedAnimationProps = useMemo(() => animationProps, []);
+  const memoizedRocketAnimationData = useMemo(() => rocket, []);
+
   return (
     <div className="relative mx-36 flex h-screen flex-row items-center justify-evenly">
       <Hero />
-      <motion.div {...animationProps}>
-        <Lottie animationData={rocket} className="size-96" />
+      <motion.div {...memoizedAnimationProps}>
+        <Lottie animationData={memoizedRocketAnimationData} className="size-96" />
       </motion.div>
       <AuroraHero />
     </div>
   );
 };
+
+export const Header = React.memo(HeaderComponent);

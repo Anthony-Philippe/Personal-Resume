@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useMemo } from "react";
 
 type IconLink = {
   icon: React.ReactElement;
@@ -10,10 +10,10 @@ type IconWaveProps = {
   icons: IconLink[];
 };
 
-export const IconWave = ({ icons }: IconWaveProps) => {
-  return (
-    <div className="flex space-x-8">
-      {icons.map((iconLink, index) => (
+export const IconWave = React.memo(({ icons }: IconWaveProps) => {
+  const iconElements = useMemo(
+    () =>
+      icons.map((iconLink, index) => (
         <motion.a
           key={index}
           href={iconLink.link}
@@ -27,7 +27,13 @@ export const IconWave = ({ icons }: IconWaveProps) => {
         >
           {iconLink.icon}
         </motion.a>
-      ))}
-    </div>
+      )),
+    [icons]
   );
-};
+
+  return (
+    <motion.div className="flex space-x-8">
+      {iconElements}
+    </motion.div>
+  );
+});
