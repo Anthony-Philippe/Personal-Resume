@@ -1,32 +1,43 @@
 import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 
 interface RevealProps {
   children: JSX.Element;
   width?: "fit-content" | "100%";
 }
 
-export const Reveal = ({ children, width = "fit-content" }: RevealProps) => {
-  const ref = useRef(null);
+const RevealComponent = ({ children, width = "fit-content" }: RevealProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   const mainControls = useAnimation();
   const slideControls = useAnimation();
 
-  useEffect(() => {
+  const startAnimation = useCallback(() => {
     if (isInView) {
       mainControls.start("visible");
       slideControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls, slideControls]);
+
+  useEffect(() => {
+    startAnimation();
+  }, [startAnimation]);
+
+  const mainVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 75 },
+    visible: { opacity: 1, y: 0 },
+  }), []);
+
+  const slideVariants = useMemo(() => ({
+    hidden: { left: 0 },
+    visible: { left: "100%" },
+  }), []);
 
   return (
     <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }}>
       <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 75 },
-          visible: { opacity: 1, y: 0 },
-        }}
+        variants={mainVariants}
         initial="hidden"
         animate={mainControls}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -34,10 +45,7 @@ export const Reveal = ({ children, width = "fit-content" }: RevealProps) => {
         {children}
       </motion.div>
       <motion.div
-        variants={{
-          hidden: { left: 0 },
-          visible: { left: "100%" },
-        }}
+        variants={slideVariants}
         initial="hidden"
         animate={slideControls}
         transition={{ duration: 0.8, ease: "easeIn" }}
@@ -46,3 +54,5 @@ export const Reveal = ({ children, width = "fit-content" }: RevealProps) => {
     </div>
   );
 };
+
+export const Reveal = memo(RevealComponent);

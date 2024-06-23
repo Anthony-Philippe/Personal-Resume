@@ -3,7 +3,7 @@ import { AuroraHero } from "@components/Aurora";
 import { Hero } from "@layouts/Hero";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
-import React, { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 const animationProps = {
   initial: { y: "-100vh", opacity: 0 },
@@ -26,4 +26,4 @@ const HeaderComponent  = () => {
   );
 };
 
-export const Header = React.memo(HeaderComponent);
+export const Header = memo(HeaderComponent);

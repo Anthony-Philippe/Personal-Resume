@@ -1,5 +1,5 @@
 import { Reveal } from "@components/Reveal";
-import React, { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 const HeroComponent = () => {
   const greetingText = useMemo(() => "Hey, I'm Anthony", []);
@@ -28,4 +28,4 @@ const HeroComponent = () => {
   );
 };
 
-export const Hero = React.memo(HeroComponent);
+export const Hero = memo(HeroComponent);

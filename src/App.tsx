@@ -1,4 +1,4 @@
-import { BouncyCardsFeatures } from "@components/BouncyCards";
+import { BouncyCards } from "@components/BouncyCards";
 import { Header } from "@layouts/Header";
 import { TopBar } from "@layouts/TopBar";
 import { Slide } from "react-awesome-reveal";
@@ -11,7 +11,7 @@ function App() {
       <TopBar />
       <Header />
       <Slide cascade>
-        <BouncyCardsFeatures />
+        <BouncyCards />
       </Slide>
     </div>
   );

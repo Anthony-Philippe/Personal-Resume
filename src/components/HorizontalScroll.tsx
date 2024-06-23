@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { memo, useMemo, useRef } from "react";
 
-export const HorizontalScrollCarousel = () => {
+const CarouselComponent = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -9,18 +9,24 @@ export const HorizontalScrollCarousel = () => {
 
   const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
+  const cardElements = useMemo(() => {
+    return cards.map((card) => {
+      return <Card card={card} key={card.id} />;
+    });
+  }, []);
+
   return (
     <section ref={targetRef} className="relative h-[300vh]">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-4">
-          {cards.map((card) => {
-            return <Card card={card} key={card.id} />;
-          })}
+          {cardElements}
         </motion.div>
       </div>
     </section>
   );
 };
+
+export const HorizontalScrollCarousel = memo(CarouselComponent);
 
 interface CardProps {
   card: {
@@ -30,7 +36,7 @@ interface CardProps {
   };
 }
 
-const Card = ({ card }: CardProps) => {
+const Card = memo(({ card }: CardProps) => {
   return (
     <div
       key={card.id}
@@ -51,7 +57,7 @@ const Card = ({ card }: CardProps) => {
       </div>
     </div>
   );
-};
+});
 
 const cards = [
   {
