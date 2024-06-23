@@ -1,7 +1,8 @@
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { memo } from "react";
 
-export const AuroraHero = () => {
+const AuroraHeroComponent = () => {
   return (
     <div className="absolute inset-0 z-0">
       <Canvas>
@@ -10,3 +11,5 @@ export const AuroraHero = () => {
     </div>
   );
 };
+
+export const AuroraHero = memo(AuroraHeroComponent);

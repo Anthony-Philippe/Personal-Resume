@@ -1,44 +1,56 @@
 import Brightness2OutlinedIcon from "@mui/icons-material/Brightness2Outlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 
 const TOGGLE_CLASSES =
   "text-sm font-medium flex items-center gap-2 px-3 md:pl-3 md:pr-3.5 py-3 md:py-1.5 transition-colors relative z-10";
 
-export const SliderToggle = () => {
+const SliderToggle = () => {
   const [selected, setSelected] = useState("dark");
+
+  const toggleClasses = useMemo(() => {
+    return `grid transition-colors ${selected === "light" ? "text-white" : "text-slate-300"}`;
+  }, [selected]);
+
   return (
-    <div
-      className={`grid transition-colors ${
-        selected === "light" ? console.log("light") : console.log("dark")
-      }`}
-    >
+    <div className={toggleClasses}>
       <Switch selected={selected} setSelected={setSelected} />
     </div>
   );
 };
+
+export const ThemeToggler = memo(SliderToggle);
 
 interface SwitchProps {
   selected: string;
   setSelected: (selected: string) => void;
 }
 
-const Switch = ({ selected, setSelected }: SwitchProps) => {
+const Switch = memo(({ selected, setSelected }: SwitchProps) => {
+  const isSelectedLight = selected === "light";
+  const isSelectedDark = selected === "dark";
+
+  const handleLightClick = useCallback(() => {
+    setSelected("light");
+  }, [setSelected]);
+
+  const handleDarkClick = useCallback(() => {
+    setSelected("dark");
+  }, [setSelected]);
+
   return (
     <div className="relative flex w-fit items-center rounded-full">
       <button
         className={`${TOGGLE_CLASSES} ${
-          selected === "light" ? "text-white" : "text-slate-300"
+          isSelectedLight ? "text-white" : "text-slate-300"
         }`}
-        onClick={() => {
-          setSelected("light");
-        }}
+        onClick={handleLightClick}
       >
         <Brightness2OutlinedIcon className="relative z-10 text-lg md:text-sm" />
         <span
           className={`relative z-10 font-semibold ${
-            selected === "light" ? "text-white" : "text-slate-300"
+            isSelectedLight ? "text-white" : "text-slate-300"
           }`}
         >
           Light
@@ -46,16 +58,14 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
       </button>
       <button
         className={`${TOGGLE_CLASSES} ${
-          selected === "dark" ? "text-white" : "text-slate-300"
+          isSelectedDark ? "text-white" : "text-slate-300"
         }`}
-        onClick={() => {
-          setSelected("dark");
-        }}
+        onClick={handleDarkClick}
       >
         <WbSunnyOutlinedIcon className="relative z-10 text-lg md:text-sm" />
         <span
           className={`relative z-10 font-semibold ${
-            selected === "dark" ? "text-white" : "text-slate-300"
+            isSelectedDark ? "text-white" : "text-slate-300"
           }`}
         >
           Dark
@@ -63,7 +73,7 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
       </button>
       <div
         className={`absolute inset-0 z-0 flex ${
-          selected === "dark" ? "justify-end" : "justify-start"
+          isSelectedDark ? "justify-end" : "justify-start"
         }`}
       >
         <motion.span
@@ -74,4 +84,4 @@ const Switch = ({ selected, setSelected }: SwitchProps) => {
       </div>
     </div>
   );
-};
+});
