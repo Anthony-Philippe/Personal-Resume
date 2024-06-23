@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BounceCard should render 1`] = `
+<mockConstructor
+  className="group relative min-h-[200px] cursor-pointer overflow-hidden rounded-2xl border-slate-50 border-2 p-8 undefined"
+  whileHover={
+    {
+      "rotate": "-1deg",
+      "scale": 0.95,
+    }
+  }
+>
+  Hello World
+</mockConstructor>
+`;

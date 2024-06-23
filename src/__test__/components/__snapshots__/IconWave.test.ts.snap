@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconWave should render with icons 1`] = `
+<div
+  className="flex space-x-8"
+>
+  <ForwardRef(MotionComponent)
+    animate={
+      {
+        "opacity": 1,
+        "y": 0,
+      }
+    }
+    className="relative text-3xl text-white cursor-pointer"
+    href="https://github.com"
+    initial={
+      {
+        "opacity": 0,
+        "y": "-100vh",
+      }
+    }
+    rel="noopener noreferrer"
+    target="_blank"
+    transition={
+      {
+        "delay": 0,
+        "duration": 1.2,
+      }
+    }
+    whileHover={
+      {
+        "scale": 1.3,
+        "transition": {
+          "duration": 0.4,
+        },
+      }
+    }
+  >
+    GitHubIcon
+  </ForwardRef(MotionComponent)>
+  <ForwardRef(MotionComponent)
+    animate={
+      {
+        "opacity": 1,
+        "y": 0,
+      }
+    }
+    className="relative text-3xl text-white cursor-pointer"
+    href="https://linkedin.com"
+    initial={
+      {
+        "opacity": 0,
+        "y": "-100vh",
+      }
+    }
+    rel="noopener noreferrer"
+    target="_blank"
+    transition={
+      {
+        "delay": 0.2,
+        "duration": 1.2,
+      }
+    }
+    whileHover={
+      {
+        "scale": 1.3,
+        "transition": {
+          "duration": 0.4,
+        },
+      }
+    }
+  >
+    LinkedInIcon
+  </ForwardRef(MotionComponent)>
+</div>
+`;
+
+exports[`IconWave should render without icons 1`] = `
+<div
+  className="flex space-x-8"
+/>
+`;

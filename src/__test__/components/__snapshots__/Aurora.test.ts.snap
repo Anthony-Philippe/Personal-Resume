@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuroraHero should render 1`] = `
+<div
+  className="absolute inset-0 z-0"
+>
+  <ForwardRef(CanvasWrapper)>
+    <ForwardRef
+      count={750}
+      factor={4}
+      fade={true}
+      radius={50}
+      speed={2}
+    />
+  </ForwardRef(CanvasWrapper)>
+</div>
+`;
