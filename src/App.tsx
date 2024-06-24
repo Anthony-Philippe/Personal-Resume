@@ -7,7 +7,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="min-h-screen bg-neutral-900 text-white">
+    <div className="min-h-screen bg-white text-black dark:bg-neutral-900 dark:text-white">
       <TopBar />
       <Header />
       <Slide cascade>
