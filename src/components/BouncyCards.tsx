@@ -9,7 +9,7 @@ import image2 from "@assets/images/PersonalResume_project_React.jpg";
 
 const BouncyCardsComponent = () => {
   return (
-    <section className="mx-auto max-w-5xl px-4 py-12 text-slate-100">
+    <section className="mx-auto max-w-5xl px-4 py-12 text-zinc-700 dark:text-slate-100">
       <div className="mb-4 grid grid-cols-12 gap-4">
         <BounceCard className="col-span-12 md:col-span-4" link="https://github.com/Anthony-Philippe/Neural-Network-Image-Classification">
           <CardTitle>Neural Network</CardTitle>
@@ -47,7 +47,7 @@ const BounceCard = memo(({ className, children, link }: BounceCardProps) => {
     <motion.div
       whileHover={{ scale: 0.95, rotate: "-1deg" }}
       className={classNames(
-        "group relative min-h-[200px] cursor-pointer overflow-hidden rounded-2xl border-2 border-slate-50 p-8",
+        "group relative min-h-[200px] cursor-pointer overflow-hidden rounded-2xl border-2 border-zinc-700 dark:border-slate-50 p-8",
         className
       )}
     >
