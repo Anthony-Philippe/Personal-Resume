@@ -22,7 +22,7 @@ const IconWaveComponent = forwardRef<HTMLDivElement, IconWaveProps>(({ icons }, 
           initial={{ y: "-100vh", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.2, delay: index * 0.2 }}
-          className="relative cursor-pointer text-3xl text-white"
+          className="relative cursor-pointer text-3xl text-dark dark:text-white"
           whileHover={{ scale: 1.3, transition: { duration: 0.4 } }}
         >
           {iconLink.icon}
