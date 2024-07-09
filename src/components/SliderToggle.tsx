@@ -60,14 +60,14 @@ const Switch = memo(({ selected, setSelected }: SwitchProps) => {
       </button>
       <button
         className={`${TOGGLE_CLASSES} ${
-          isSelectedDark ? "text-white" : "text-slate-300"
+          isSelectedDark ? "text-white" : "text-slate-700"
         }`}
         onClick={handleDarkClick}
       >
         <WbSunnyOutlinedIcon className="relative z-10 text-lg md:text-sm" />
         <span
           className={`relative z-10 font-semibold ${
-            isSelectedDark ? "text-white" : "text-slate-300"
+            isSelectedDark ? "text-white" : "text-slate-700"
           }`}
         >
           Dark
