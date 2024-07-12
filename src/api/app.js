@@ -5,22 +5,20 @@
  * It requires the routes file and sets up the API routes.
  * It listens on a specified port and logs a message when the server is running. 
  */
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const xssClean = require('xss-clean');
-const hpp = require('hpp');
-const dotenv = require('dotenv');
+import cors from 'cors';
+import { config } from 'dotenv';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import xssClean from 'xss-clean';
 
 const app = express();
 const port = process.env.PORT || 3000;
-dotenv.config();
+config();
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, // 15  minutes
   max: 100,
   message: 'Too many requests !'
 });
@@ -28,14 +26,15 @@ const limiter = rateLimit({
 app.use(limiter);
 app.use(xssClean());
 app.use(hpp());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 
-const routes = require('./config/routes');
-app.use('/api/v1/', routes);
+import routes, { defaultRoutes } from './config/routes.js';
+app.use(defaultRoutes, routes);
 
-// listen on port 3000
+// Listen on port 3000
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port http://localhost:${port}`);
 });
