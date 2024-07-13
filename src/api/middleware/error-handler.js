@@ -1,8 +1,8 @@
 /**
- * Error middleware
- * @param {*} err, req, res, next
+ * @module /middleware/error-handler
+ * @fileoverview This file exports the errorHandler middleware function.
  * @returns JSON response
- * @description This middleware handles all errors that are thrown in the application.
+ * This middleware handles all errors that are thrown in the application.
  */
 function errorHandler(err, req, res, next) {
   const statusCode = err.statusCode || 500;

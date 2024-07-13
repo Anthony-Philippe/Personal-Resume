@@ -1,9 +1,8 @@
 /**
- * The app.js file is the entry point for the API.
+ * @module app.js
+ * @fileoverview The app.js file is the entry point for the API.
  * It sets up the express server, configures middleware, and listens on a specified port
  * It configures middleware such as body-parser, cors, helmet, rate-limit, xss-clean, and hpp.
- * It requires the routes file and sets up the API routes.
- * It listens on a specified port and logs a message when the server is running. 
  */
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -28,13 +27,18 @@ app.use(xssClean());
 app.use(hpp());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use(helmet());
 
-import routes, { defaultRoutes } from './config/routes.js';
-app.use(defaultRoutes, routes);
+// Local middleware
+import errorHandler from './middleware/error-handler.js';
+app.use(errorHandler);
+
+// Routes
+import { routes } from './routes/routes.js';
+app.use(routes);
 
 // Listen on port 3000
 app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`);
+  console.log(`Server is running on port http://localhost:${port}/api/v1`);
 });
