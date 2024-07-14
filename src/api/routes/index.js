@@ -1,5 +1,5 @@
 /**
- * @module /routes/routes
+ * @module /routes/index.js
  * @fileOverview - This file contains the routes for the API.
  * It exports the router object that contains the route definitions.
  */
