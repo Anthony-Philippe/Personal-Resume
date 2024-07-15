@@ -35,7 +35,7 @@ import errorHandler from './middleware/error-handler.js';
 app.use(errorHandler);
 
 // Routes
-import { routes } from './routes/index.js';
+import { routes } from './routes.js';
 app.use(routes);
 
 // Listen on port 3000

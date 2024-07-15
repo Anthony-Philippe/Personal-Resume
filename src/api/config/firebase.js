@@ -7,10 +7,10 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-import firebaseConfig from './firebaseConfig';
+import firebaseConfig from './provider.js';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { db, storage };
+export default db ;
