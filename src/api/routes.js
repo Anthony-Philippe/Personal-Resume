@@ -5,15 +5,9 @@
  */
 import express from 'express';
 import { getContentById } from './controllers/dataController.js';
-import { ApiEntryDoc } from './controllers/entry.js';
 
 const router = express.Router();
 const defaultRoutes = "/api/v1"; // Default API route
-
-// GET request for the default route
-router.get(defaultRoutes, (req, res) => {
-  res.send(ApiEntryDoc);
-});
 
 router.get(`${defaultRoutes}/content/:id`, getContentById);
 

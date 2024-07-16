@@ -3,6 +3,7 @@
  * @fileoverview The app.js file is the entry point for the API.
  * It sets up the express server, configures middleware, and listens on a specified port
  * It configures middleware such as body-parser, cors, helmet, rate-limit, xss-clean, and hpp.
+ * It also serves static files and sets up error handling middleware.
  */
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -10,7 +11,12 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import xssClean from 'xss-clean';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -40,6 +46,12 @@ app.use(helmet({
 // Local middleware
 import errorHandler from './middleware/error-handler.js';
 app.use(errorHandler);
+
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/api/v1', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
+});
 
 // Routes
 import { routes } from './routes.js';
