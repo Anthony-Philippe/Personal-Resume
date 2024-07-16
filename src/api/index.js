@@ -28,7 +28,14 @@ app.use(hpp());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'sha256-HqcrltV/add35ktFKnghPtUZD86xFk2tNSOVuSxlxZI='"]
+    }
+  }
+}));
 
 // Local middleware
 import errorHandler from './middleware/error-handler.js';
