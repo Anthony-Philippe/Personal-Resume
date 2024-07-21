@@ -138,3 +138,4 @@ yarn.lock
 .idea
 .DS_Store
 /.million
+src/firebase/config/serviceAccountKey.json
