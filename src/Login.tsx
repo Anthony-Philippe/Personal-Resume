@@ -2,7 +2,7 @@
 import { browserLocalPersistence, browserSessionPersistence, setPersistence } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "./auth/auth";
+import { login, resetPassword } from "./auth/auth";
 import { auth } from "./auth/firebase";
 
 const Login: React.FC = () => {
@@ -10,6 +10,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,6 +23,16 @@ const Login: React.FC = () => {
       navigate("/");
     } catch (error) {
       setError("Erreur lors de la connexion");
+      console.error(error);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    try {
+      await resetPassword(email);
+      setMessage('E-mail de réinitialisation envoyé. Veuillez vérifier votre boîte de réception.');
+    } catch (error) {
+      setError('Erreur lors de l\'envoi de l\'e-mail de réinitialisation.');
       console.error(error);
     }
   };
@@ -51,6 +62,7 @@ const Login: React.FC = () => {
         {error && <p>{error}</p>}
         <button type="submit">Se connecter</button>
       </form>
+      <button onClick={handlePasswordReset}>Mot de passe oublié ?</button>
     </div>
   );
 };
