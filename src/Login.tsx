@@ -20,7 +20,7 @@ const Login: React.FC = () => {
       const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
       await setPersistence(auth, persistence);
       await login(email, password);
-      navigate("/");
+      navigate("/verify-code");
     } catch (error) {
       setError("Erreur lors de la connexion");
       console.error(error);

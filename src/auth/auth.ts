@@ -1,5 +1,10 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "./firebase";
+import emailjs from 'emailjs-com';
+
+const generateVerificationCode = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
 
 export const register = async (email: string, password: string) => {
   try {
@@ -17,6 +22,16 @@ export const login = async (email: string, password: string) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const token = await userCredential.user.getIdToken();
     console.log("Token après connexion :", token);
+
+    const verificationCode = generateVerificationCode();
+    localStorage.setItem('verificationCode', verificationCode);
+    localStorage.setItem('userEmail', email);
+
+    await emailjs.send('your_service_id', 'your_template_id', {
+      to_email: email,
+      verification_code: verificationCode,
+    }, 'your_user_id');
+
     return userCredential.user;
   } catch (error) {
     throw error;

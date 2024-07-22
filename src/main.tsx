@@ -10,6 +10,7 @@ import Home from "./Home";
 import Login from "./Login";
 import RecoverPassword from './RecoverPassword';
 import Register from "./Register";
+import VerifyCode from './VerifyCode';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/register" element={<Register />} />
             <Route path="/recover-password" element={<RecoverPassword />} />
             <Route path="/error" element={<ErrorPage />} />
+            <Route path="/verify-code" element={<VerifyCode />} />
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<Home />} />
             </Route>
