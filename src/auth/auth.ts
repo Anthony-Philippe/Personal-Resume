@@ -1,16 +1,10 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "./firebase";
-import emailjs from 'emailjs-com';
-
-const generateVerificationCode = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-};
 
 export const register = async (email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const token = await userCredential.user.getIdToken();
-    console.log("Token après inscription :", token);
+    //const token = await userCredential.user.getIdToken();
     return userCredential.user;
   } catch (error) {
     throw error;
@@ -20,19 +14,16 @@ export const register = async (email: string, password: string) => {
 export const login = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const token = await userCredential.user.getIdToken();
-    console.log("Token après connexion :", token);
-
-    const verificationCode = generateVerificationCode();
-    localStorage.setItem('verificationCode', verificationCode);
-    localStorage.setItem('userEmail', email);
-
-    await emailjs.send('your_service_id', 'your_template_id', {
-      to_email: email,
-      verification_code: verificationCode,
-    }, 'your_user_id');
-
-    return userCredential.user;
+    const user = userCredential.user;
+    const tokenResponse = await fetch('http://localhost:3000/generate-otp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, uid: user.uid }),
+    });
+    const { token } = await tokenResponse.json();
+    sessionStorage.setItem('otpToken', token);
+    sessionStorage.setItem('uid', user.uid);
+    return user;
   } catch (error) {
     throw error;
   }
@@ -41,6 +32,8 @@ export const login = async (email: string, password: string) => {
 export const logout = async () => {
   try {
     await signOut(auth);
+    sessionStorage.removeItem('otpToken');
+    sessionStorage.removeItem('uid');
   } catch (error) {
     throw error;
   }

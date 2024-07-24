@@ -14,7 +14,7 @@ import hpp from 'hpp';
 import xssClean from 'xss-clean';
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 config();
 
 const limiter = rateLimit({
@@ -43,10 +43,59 @@ import errorHandler from './middleware/error-handler.js';
 app.use(errorHandler);
 
 // Routes
-import { routes } from './routes.js';
-app.use(routes);
+/*import { routes } from './routes.js';
+app.use(routes);*/
 
-// Listen on port 5000
+import jwt from 'jsonwebtoken';
+import { db, firebase } from './config/firebase.js';
+
+const JWT_secret = 'xzi1M9fnKIUAXm8cQaq7hNvGjDOO8DZBxQ'
+
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+app.post('/generate-otp', async (req, res) => {
+  const { email, uid } = req.body;
+  const otp = generateOTP();
+  const token = jwt.sign({ email, uid, otp }, JWT_secret, { expiresIn: '10m' });
+
+  await db.collection('otps').doc(uid).set({
+    otp,
+    token,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  });
+
+  console.log(`OTP for ${email}: ${otp}`);
+
+  res.send({ message: 'OTP generated and sent to user', token });
+});
+
+app.post('/verify-otp', async (req, res) => {
+  const { uid, otp } = req.body;
+  const token = req.headers.authorization.split(' ')[1];
+
+  try {
+    const decoded = jwt.verify(token, JWT_secret);
+    const doc = await db.collection('otps').doc(uid).get();
+
+    if (!doc.exists) {
+      return res.status(400).send({ error: 'Invalid OTP or expired' });
+    }
+
+    const data = doc.data();
+
+    if (data.otp === otp) {
+      await db.collection('otps').doc(uid).delete();
+      return res.send({ message: 'OTP verified successfully' });
+    } else {
+      return res.status(400).send({ error: 'Invalid OTP' });
+    }
+  } catch (error) {
+    return res.status(400).send({ error: 'Invalid token or token expired' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
 });

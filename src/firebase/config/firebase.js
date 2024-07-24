@@ -9,4 +9,7 @@ firebase.initializeApp({
   credential: firebase.credential.cert(credentials),
 });
 
-export {firebase};
+const db = firebase.firestore();
+
+export { db, firebase };
+
