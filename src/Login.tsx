@@ -3,6 +3,7 @@ import { browserLocalPersistence, browserSessionPersistence, setPersistence } fr
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, resetPassword } from "./auth/auth";
+import { useAuth } from "./auth/AuthContext";
 import { auth } from "./auth/firebase";
 
 const Login: React.FC = () => {
@@ -12,6 +13,13 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+  
+  const { user } = useAuth();
+  React.useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +28,8 @@ const Login: React.FC = () => {
       const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
       await setPersistence(auth, persistence);
       await login(email, password);
-      navigate("/verify-code");
+      const token = sessionStorage.getItem('otpToken');
+      navigate(`/verify-code?token=${token}`, { replace: true });
     } catch (error) {
       setError("Erreur lors de la connexion");
       console.error(error);

@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <AuthProvider>
         <Router>
           <Routes>
-          <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/recover-password" element={<RecoverPassword />} />
             <Route path="/error" element={<ErrorPage />} />
