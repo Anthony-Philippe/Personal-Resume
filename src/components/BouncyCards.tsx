@@ -1,34 +1,27 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
 import { memo } from "react";
-
-import image1 from "@assets/images/CNN_project_Python.jpg";
-import image3 from "@assets/images/MountainMinder_project_Kotlin.jpg";
-import image4 from "@assets/images/Othello_project_C.jpg";
-import image2 from "@assets/images/PersonalResume_project_React.jpg";
+import { Link } from 'react-router-dom';
+import { projects } from './projectsData';
 
 const BouncyCardsComponent = () => {
   return (
     <section className="mx-auto max-w-5xl px-4 py-12 text-zinc-700 dark:text-slate-100">
       <div className="mb-4 grid grid-cols-12 gap-4">
-        <BounceCard className="col-span-12 md:col-span-4" link="https://github.com/Anthony-Philippe/Neural-Network-Image-Classification">
-          <CardTitle>Neural Network</CardTitle>
-          <CardContent colorFrom="from-indigo-400" colorTo="to-violet-700" imageSrc={image1} />
-        </BounceCard>
-        <BounceCard className="col-span-12 md:col-span-8" link="https://github.com/Anthony-Philippe/Personal-Resume">
-          <CardTitle>Digital Personal Resume</CardTitle>
-          <CardContent colorFrom="from-amber-400" colorTo="to-orange-700" imageSrc={image2} />
-        </BounceCard>
+        {projects.slice(0, 2).map((project) => (
+          <BounceCard key={project.id} className="col-span-12 md:col-span-6" link={`/project/${project.id}`}>
+            <CardTitle>{project.name}</CardTitle>
+            <CardContent colorFrom={project.colorFrom} colorTo={project.colorTo} imageSrc={project.imageSrc} />
+          </BounceCard>
+        ))}
       </div>
       <div className="grid grid-cols-12 gap-4">
-        <BounceCard className="col-span-12 md:col-span-8" link="https://github.com/Anthony-Philippe/MountainMinder/tree/master">
-          <CardTitle>Moutain Minder</CardTitle>
-          <CardContent colorFrom="from-green-400" colorTo="to-emerald-700" imageSrc={image3} />
-        </BounceCard>
-        <BounceCard className="col-span-12 md:col-span-4" link="https://github.com/Anthony-Philippe/Othello-Game">
-          <CardTitle>Othello Game</CardTitle>
-          <CardContent colorFrom="from-pink-400" colorTo="to-red-700" imageSrc={image4} />
-        </BounceCard>
+        {projects.slice(2).map((project) => (
+          <BounceCard key={project.id} className="col-span-12 md:col-span-6" link={`/project/${project.id}`}>
+            <CardTitle>{project.name}</CardTitle>
+            <CardContent colorFrom={project.colorFrom} colorTo={project.colorTo} imageSrc={project.imageSrc} />
+          </BounceCard>
+        ))}
       </div>
     </section>
   );
@@ -51,7 +44,7 @@ const BounceCard = memo(({ className, children, link }: BounceCardProps) => {
         className
       )}
     >
-      <a href={link} target="_blank" rel="noopener noreferrer">{children}</a>
+      <Link to={link || ""}>{children}</Link>
     </motion.div>
   );
 });
