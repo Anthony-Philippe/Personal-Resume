@@ -1,4 +1,3 @@
-// ProjectPage.js
 import { useParams } from 'react-router-dom';
 import { projects } from '../assets/projectsData';
 
@@ -6,9 +5,7 @@ const ProjectPage = () => {
   const { id } = useParams();
   const project = projects.find(p => p.id === parseInt(id as string));
 
-  if (!project) {
-    return <div>Project not found</div>;
-  }
+  if (!project) return <div>Project not found</div>;
 
   return (
     <div className="project-page p-8">
@@ -17,7 +14,7 @@ const ProjectPage = () => {
       <img
         src={project.imageSrc}
         alt={project.name}
-        className="w-full h-auto mb-6 rounded-lg"
+        className="w-3/5 h-auto mb-6 rounded-lg"
       />
       <a 
         href={project.githubLink} 

@@ -3,7 +3,7 @@ import { Header } from "@layouts/Header";
 import { TopBar } from "@layouts/TopBar";
 import { Slide } from "react-awesome-reveal";
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import ProjectPage from './layouts/ProjectPage';
+import ProjectPage from './layouts/ProjectDetails';
 
 import "./App.css";
 
