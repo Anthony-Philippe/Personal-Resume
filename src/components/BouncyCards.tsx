@@ -2,14 +2,14 @@ import classNames from "classnames";
 import { motion } from "framer-motion";
 import { memo } from "react";
 import { Link } from 'react-router-dom';
-import { projects } from './projectsData';
+import { projects } from '../assets/projectsData';
 
 const BouncyCardsComponent = () => {
   return (
     <section className="mx-auto max-w-5xl px-4 py-12 text-zinc-700 dark:text-slate-100">
       <div className="mb-4 grid grid-cols-12 gap-4">
         {projects.slice(0, 2).map((project) => (
-          <BounceCard key={project.id} className="col-span-12 md:col-span-6" link={`/project/${project.id}`}>
+          <BounceCard key={project.id} className={`col-span-12 ? ${project.id === 2 ? "md:col-span-8" : "md:col-span-4"}`} link={`/project/${project.id}`}>
             <CardTitle>{project.name}</CardTitle>
             <CardContent colorFrom={project.colorFrom} colorTo={project.colorTo} imageSrc={project.imageSrc} />
           </BounceCard>
@@ -17,7 +17,7 @@ const BouncyCardsComponent = () => {
       </div>
       <div className="grid grid-cols-12 gap-4">
         {projects.slice(2).map((project) => (
-          <BounceCard key={project.id} className="col-span-12 md:col-span-6" link={`/project/${project.id}`}>
+          <BounceCard key={project.id} className={`col-span-12 ? ${project.id === 3 ? "md:col-span-8" : "md:col-span-4"}`} link={`/project/${project.id}`}>
             <CardTitle>{project.name}</CardTitle>
             <CardContent colorFrom={project.colorFrom} colorTo={project.colorTo} imageSrc={project.imageSrc} />
           </BounceCard>

@@ -1,10 +1,10 @@
 // ProjectPage.js
 import { useParams } from 'react-router-dom';
-import { projects } from './projectsData';
+import { projects } from '../assets/projectsData';
 
 const ProjectPage = () => {
   const { id } = useParams();
-  const project = projects.find(p => p.id === parseInt(id));
+  const project = projects.find(p => p.id === parseInt(id as string));
 
   if (!project) {
     return <div>Project not found</div>;
